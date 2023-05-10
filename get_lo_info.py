@@ -12,6 +12,7 @@ their own GitHub repo.
 
 """
 import os
+import platform as p
 from pathlib import Path
 
 # defaults that should work on all machines
@@ -42,7 +43,8 @@ which_matlab = '/usr/local/bin/matlab'
 
 HOME = Path.home()
 try:
-    HOSTNAME = os.environ['HOSTNAME']
+    #HOSTNAME = os.environ['HOSTNAME']
+    HOSTNAME = p.uname()[1]
 except KeyError:
     HOSTNAME = 'BLANK'
     
@@ -55,6 +57,13 @@ if str(HOME) == '/Users/ryanarta':
     lo_env = 'ra_mac'
     which_matlab = '/Applications/MATLAB_R2020a.app/bin/matlab'
 
+elif (str(HOME) == '/home/ryanarta') & ('rubin' in HOSTNAME):
+    lo_env = 'ra_rubin'
+    roms_out1 = Path('/blue/ryanarta/LO_roms')
+    roms_out2 = Path('/blue/ryanarta/LO_roms')
+    roms_out3 = Path('/blue/ryanarta/LiveOcean_roms/output')
+    roms_out4 = Path('/blue/ryanarta/LiveOcean_roms/output')
+    
 elif (str(HOME) == '/home/parker') & ('perigee' in HOSTNAME):
     lo_env = 'pm_perigee'
     roms_out1 = Path('/agdat1/parker/LO_roms')
